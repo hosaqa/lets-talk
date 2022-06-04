@@ -6,7 +6,7 @@ class MediaRecordManager {
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
         this._mediaRecorder = new MediaRecorder(stream);
-        debugger
+        
         this._mediaRecorder.addEventListener('dataavailable', event => {
           this._audioChunks.push(event.data);
         });
@@ -27,7 +27,7 @@ class MediaRecordManager {
 
   stop = () => {
     this._mediaRecorder.stop();
-    debugger
+    
     const audioBlob = new Blob(this._audioChunks, { 'type': 'audio/ogg; codecs=opus' });
     const audioUrl = URL.createObjectURL(audioBlob);
 

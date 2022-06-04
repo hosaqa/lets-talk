@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Timer from '../utils/timer';
@@ -11,9 +12,6 @@ export default function UITimer ({ className, timeout, onExpire }) {
   const timerRef = useRef(new Timer(timeout));
 
   const [ms, setMs] = useState(timeout);
-
-  const msRef = useRef(ms);
-
 
   const text = ms / 1000;
 
@@ -34,4 +32,10 @@ export default function UITimer ({ className, timeout, onExpire }) {
       {text}
     </Text>
   )
+}
+
+UITimer.propTypes = {
+  className: PropTypes.string,
+  timeout: PropTypes.number.isRequired,
+  onExpire: PropTypes.func,
 }
