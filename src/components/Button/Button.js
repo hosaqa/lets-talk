@@ -13,18 +13,15 @@ const SButton = styled.button`
   border-radius: 12px;
 `;
 
-export default function Button ({ children, className, ...buttonProps}) {
+export default function Button({ children, className, ...buttonProps }) {
   return (
     <SButton className={className} {...buttonProps}>
       {children}
     </SButton>
-  )
+  );
 }
 
 Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-  className: PropTypes.string,
-}
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  className: PropTypes.string
+};

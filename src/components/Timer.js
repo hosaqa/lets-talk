@@ -8,7 +8,7 @@ const Text = styled.div`
   font-size: 18px;
 `;
 
-export default function UITimer ({ className, timeout, onExpire }) {
+export default function UITimer({ className, timeout, onExpire }) {
   const timerRef = useRef(new Timer(timeout));
 
   const [ms, setMs] = useState(timeout);
@@ -26,16 +26,12 @@ export default function UITimer ({ className, timeout, onExpire }) {
       }
     });
   }, []);
-  
-  return (
-    <Text className={className}>
-      {text}
-    </Text>
-  )
+
+  return <Text className={className}>{text}</Text>;
 }
 
 UITimer.propTypes = {
   className: PropTypes.string,
   timeout: PropTypes.number.isRequired,
-  onExpire: PropTypes.func,
-}
+  onExpire: PropTypes.func
+};

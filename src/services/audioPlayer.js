@@ -5,7 +5,7 @@ class AudioPlayer {
 
   play = () => {
     this._audio.play();
-  }
+  };
 }
 
 export default AudioPlayer;

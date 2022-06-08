@@ -10,12 +10,12 @@ const PageContent = styled.div`
   justify-content: center;
 `;
 
-export default function Home () {
+export default function Home() {
   return (
     <Container>
       <PageContent>
         <Recorder />
       </PageContent>
     </Container>
-  )
+  );
 }

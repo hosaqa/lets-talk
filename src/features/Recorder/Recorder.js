@@ -9,9 +9,9 @@ const ProcessButtons = styled.div`
   display: flex;
 `;
 
-export default function Recorder () {
+export default function Recorder() {
   const [status, setStatus] = useState('idle'); // idle | recording | paused | stopped
-  
+
   useEffect(() => {
     if (status === 'recording') {
       mediaRecordManager.startRecord();
@@ -21,22 +21,26 @@ export default function Recorder () {
       const audioUrl = mediaRecordManager.stop();
 
       const player = new AudioPlayer(audioUrl);
-      
+
       player.play();
     }
   }, [status]);
 
-  return <div>
-    {status === 'idle' 
-      ? <Button onClick={() => setStatus('recording')}>💬 Okay, let&apos;s talk!</Button>
-      : <ProcessButtons>
-        <Timer timeout={5000}/>
-        {status === 'paused'
-          ? <Button onClick={() => setStatus('recording')}>Continue</Button>
-          : <Button onClick={() => setStatus('paused')}>Pause</Button>
-        }
-        <Button onClick={() => setStatus('stopped')}>Stop it</Button>
-      </ProcessButtons>
-    }
-  </div>
+  return (
+    <div>
+      {status === 'idle' ? (
+        <Button onClick={() => setStatus('recording')}>💬 Okay, let&apos;s talk!</Button>
+      ) : (
+        <ProcessButtons>
+          <Timer timeout={5000} />
+          {status === 'paused' ? (
+            <Button onClick={() => setStatus('recording')}>Continue</Button>
+          ) : (
+            <Button onClick={() => setStatus('paused')}>Pause</Button>
+          )}
+          <Button onClick={() => setStatus('stopped')}>Stop it</Button>
+        </ProcessButtons>
+      )}
+    </div>
+  );
 }

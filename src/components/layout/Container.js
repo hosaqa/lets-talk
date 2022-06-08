@@ -8,16 +8,9 @@ const SContainer = styled.div`
 `;
 
 export default function Container({ children }) {
-  return (
-    <SContainer>
-      {children}
-    </SContainer>
-  );
+  return <SContainer>{children}</SContainer>;
 }
 
 Container.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-}
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+};
