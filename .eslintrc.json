@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -20,5 +21,6 @@
     "react"
   ],
   "rules": {
-  }
+  },
+  "ignorePatterns": ["jest.config.js", "babel.config.js"]
 }
