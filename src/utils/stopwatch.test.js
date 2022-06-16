@@ -83,3 +83,17 @@ test('resume method should continue ticking', () => {
 
   expect(stopwatch.currentTime).toBe(17000);
 });
+
+test('method on should add a callback for on the related event', () => {
+  const callback = jest.fn();
+  const stopwatch = new Stopwatch();
+
+  stopwatch.on('tick', callback);
+
+  stopwatch.start();
+  jest.advanceTimersByTime(3000);
+
+  stopwatch.pause();
+
+  expect(callback).toHaveBeenCalledTimes(3);
+});

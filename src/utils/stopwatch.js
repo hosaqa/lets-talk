@@ -46,6 +46,10 @@ class Stopwatch {
       }
     }, 1000);
   };
+
+  on = (event, callback) => {
+    this._callbacks[event].push(callback);
+  };
 }
 
 export default Stopwatch;
