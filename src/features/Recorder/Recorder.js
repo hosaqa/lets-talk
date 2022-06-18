@@ -1,31 +1,30 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import Button from '../../components/Button/Button';
-import useRecorderState from './useRecorderState';
+import useRecorderStore from './useRecorderStore';
 
 const ProcessButtons = styled.div`
   display: flex;
 `;
 
-export default function Recorder() {
-  const { currentTime, status, setStatus } = useRecorderState();
+function Recorder() {
+  const { time, status, startRecord, pause, stop } = useRecorderStore();
 
   return (
     <div>
-      <div>{currentTime / 1000}</div>
+      {(status === 'recording' || status === 'paused') && <div>{time / 1000}</div>}
       {status === 'idle' ? (
-        <Button onClick={() => setStatus('recording')}>💬 Okay, let&apos;s talk!</Button>
+        <Button onClick={startRecord}>💬 Okay, let&apos;s talk!</Button>
       ) : (
         <ProcessButtons>
           {status === 'stopped' ? (
-            <div>11</div>
+            <div>Okay</div>
           ) : (
             <>
-              {status === 'recording' && <Button onClick={() => setStatus('paused')}>Pause</Button>}
-              {status === 'paused' && (
-                <Button onClick={() => setStatus('recording')}>Continue</Button>
-              )}
-              <Button onClick={() => setStatus('stopped')}>Stop it</Button>
+              {status === 'recording' && <Button onClick={pause}>Pause</Button>}
+              {status === 'paused' && <Button onClick={startRecord}>Continue</Button>}
+              <Button onClick={stop}>Stop it</Button>
             </>
           )}
         </ProcessButtons>
@@ -33,3 +32,5 @@ export default function Recorder() {
     </div>
   );
 }
+
+export default observer(Recorder);
