@@ -1,4 +1,4 @@
-import { makeObservable, observable, action, reaction } from 'mobx';
+import { makeObservable, observable, action, reaction, computed } from 'mobx';
 import Stopwatch from '../../../utils/stopwatch';
 
 export default class RecorderStore {
@@ -15,6 +15,7 @@ export default class RecorderStore {
     makeObservable(this, {
       status: observable,
       time: observable,
+      timeInSeconds: computed,
       startRecord: action,
       pause: action,
       stop: action,
@@ -36,6 +37,14 @@ export default class RecorderStore {
         }
       }
     );
+  }
+
+  get timeInSeconds() {
+    return this.time / 1000;
+  }
+
+  get audioUrl() {
+    return this.mediaRecordManager.audioUrl;
   }
 
   startRecord = () => {

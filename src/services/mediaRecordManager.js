@@ -2,6 +2,7 @@ class MediaRecordManager {
   _mediaRecorder = null;
   _audioChunks = [];
   _status = 'idle';
+  _audioUrl = null;
 
   constructor() {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
@@ -9,6 +10,13 @@ class MediaRecordManager {
 
       this._mediaRecorder.addEventListener('dataavailable', (event) => {
         this._audioChunks.push(event.data);
+      });
+      this._mediaRecorder.addEventListener('stop', () => {
+        const audioBlob = new Blob(this._audioChunks, { type: 'audio/ogg; codecs=opus' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        this._audioChunks.length = 0;
+
+        this._audioUrl = audioUrl;
       });
     });
   }
@@ -19,6 +27,10 @@ class MediaRecordManager {
 
   get isRecording() {
     return this._status === 'recording';
+  }
+
+  get audioUrl() {
+    return this._audioUrl;
   }
 
   startRecord = () => {
@@ -39,13 +51,6 @@ class MediaRecordManager {
   stop = () => {
     this._status = 'idle';
     this._mediaRecorder.stop();
-
-    const audioBlob = new Blob(this._audioChunks, { type: 'audio/ogg; codecs=opus' });
-    const audioUrl = URL.createObjectURL(audioBlob);
-
-    this._audioChunks.length = 0;
-
-    return audioUrl;
   };
 }
 

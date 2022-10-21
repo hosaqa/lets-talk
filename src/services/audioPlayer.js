@@ -1,4 +1,4 @@
-class AudioPlayer {
+export class AudioPlayer {
   constructor(audioUrl) {
     this._audio = new Audio(audioUrl);
   }
@@ -6,6 +6,8 @@ class AudioPlayer {
   play = () => {
     this._audio.play();
   };
-}
 
-export default AudioPlayer;
+  pause = () => {};
+
+  stop = () => {};
+}

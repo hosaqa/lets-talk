@@ -3,23 +3,24 @@ import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import Button from '../../components/Button/Button';
 import useRecorderStore from './useRecorderStore';
+import AudioPlayer from '../AudioPlayer/AudioPlayer';
 
 const ProcessButtons = styled.div`
   display: flex;
 `;
 
 function Recorder() {
-  const { time, status, startRecord, pause, stop } = useRecorderStore();
+  const { timeInSeconds, status, startRecord, pause, stop, audioUrl } = useRecorderStore();
 
   return (
     <div>
-      {(status === 'recording' || status === 'paused') && <div>{time / 1000}</div>}
+      {(status === 'recording' || status === 'paused') && <div>{timeInSeconds}</div>}
       {status === 'idle' ? (
         <Button onClick={startRecord}>💬 Okay, let&apos;s talk!</Button>
       ) : (
         <ProcessButtons>
           {status === 'stopped' ? (
-            <div>Okay</div>
+            <AudioPlayer audioUrl={audioUrl} />
           ) : (
             <>
               {status === 'recording' && <Button onClick={pause}>Pause</Button>}
