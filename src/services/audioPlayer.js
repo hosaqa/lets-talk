@@ -7,7 +7,9 @@ export class AudioPlayer {
     this._audio.play();
   };
 
-  pause = () => {};
+  pause = () => {
+    this._audio.pause();
+  };
 
   stop = () => {};
 }

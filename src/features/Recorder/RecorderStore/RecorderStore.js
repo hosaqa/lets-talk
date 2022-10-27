@@ -12,6 +12,8 @@ export default class RecorderStore {
     this.time = this.stopwatch.currentTime;
     this.stopwatch.on('tick', this.setCurrentTime);
 
+    this.audioUrl = null;
+
     makeObservable(this, {
       status: observable,
       time: observable,
@@ -19,20 +21,31 @@ export default class RecorderStore {
       startRecord: action,
       pause: action,
       stop: action,
-      setCurrentTime: action
+      reset: action,
+      setCurrentTime: action,
+      audioUrl: observable,
+      setAudioUrl: action
     });
 
     this.dispose = reaction(
       () => this.status,
-      (status) => {
+      (status, prevStatus) => {
         if (status === 'recording') {
-          mediaRecordManager.startRecord();
-          this.stopwatch.start();
+          if (prevStatus === 'paused') {
+            mediaRecordManager.resume();
+            this.stopwatch.resume();
+          } else {
+            mediaRecordManager.startRecord();
+            this.stopwatch.start();
+            this.setAudioUrl(null);
+          }
         } else if (status === 'paused') {
           mediaRecordManager.pause();
           this.stopwatch.pause();
         } else if (status === 'stopped') {
-          mediaRecordManager.stop();
+          mediaRecordManager.stop().then((audioUrl) => {
+            this.setAudioUrl(audioUrl);
+          });
           this.stopwatch.pause();
         }
       }
@@ -43,9 +56,9 @@ export default class RecorderStore {
     return this.time / 1000;
   }
 
-  get audioUrl() {
-    return this.mediaRecordManager.audioUrl;
-  }
+  setAudioUrl = (audioUrl) => {
+    this.audioUrl = audioUrl;
+  };
 
   startRecord = () => {
     this.status = 'recording';
@@ -55,11 +68,24 @@ export default class RecorderStore {
     this.status = 'paused';
   };
 
+  resume = () => {
+    this.status = 'recording';
+  };
+
   stop = () => {
     this.status = 'stopped';
   };
 
+  reset = () => {
+    this.status = 'idle';
+    this.time = 0;
+  };
+
   setCurrentTime = (value) => {
     this.time = value;
+  };
+
+  destroy = () => {
+    this.dispose();
   };
 }

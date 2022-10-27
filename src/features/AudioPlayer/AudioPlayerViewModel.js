@@ -39,4 +39,8 @@ export class AudioPlayerViewModel {
   stop = () => {
     this.status = 'idle';
   };
+
+  destroy = () => {
+    this.dispose();
+  };
 }
