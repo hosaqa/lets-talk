@@ -22,5 +22,5 @@
   ],
   "rules": {
   },
-  "ignorePatterns": ["jest.config.js", "babel.config.js"]
+  "ignorePatterns": ["jest.config.js", "babel.config.js", "tsconfig.json"]
 }

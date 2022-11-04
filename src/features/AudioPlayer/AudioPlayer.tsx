@@ -4,9 +4,12 @@ import { observer } from 'mobx-react-lite';
 import Button from '../../components/Button/Button';
 import { useViewModel } from '../../hooks/useViewModel';
 import { AudioPlayerViewModel } from './AudioPlayerViewModel';
+import { AudioPlayer } from '../../services/audioPlayer';
 
-function AudioPlayer({ audioUrl }) {
-  const { status, play, pause, stop } = useViewModel(new AudioPlayerViewModel(audioUrl));
+function AudioPlayerUI({ audioUrl }: { audioUrl: string }) {
+  const { status, play, pause, stop } = useViewModel(
+    new AudioPlayerViewModel(new AudioPlayer(), audioUrl)
+  );
 
   return (
     <div>
@@ -22,8 +25,4 @@ function AudioPlayer({ audioUrl }) {
   );
 }
 
-AudioPlayer.propTypes = {
-  audioUrl: PropTypes.any
-};
-
-export default observer(AudioPlayer);
+export default observer(AudioPlayerUI);

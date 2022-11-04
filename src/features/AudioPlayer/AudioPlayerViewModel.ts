@@ -1,12 +1,16 @@
-import { makeObservable, observable, action, reaction } from 'mobx';
-import { AudioPlayer } from '../../services/audioPlayer';
+import { makeObservable, observable, action, reaction, IReactionDisposer } from 'mobx';
+import { IAudioPlayer } from '../../services/audioPlayer';
+
 
 export class AudioPlayerViewModel {
-  status = 'idle';
+  status: 'idle' | 'playing' | 'paused' | 'stopped' = 'idle';
+  private _disposeStatusReaction: IReactionDisposer;
+  private _audioPlayer: IAudioPlayer;
 
-  constructor(audioUrl) {
-    this._audioPlayer = new AudioPlayer(audioUrl);
-
+  public constructor(
+    audioPlayer: IAudioPlayer,
+    audioUrl: string,
+  ) {
     makeObservable(this, {
       status: observable,
       play: action,
@@ -14,7 +18,7 @@ export class AudioPlayerViewModel {
       stop: action
     });
 
-    this.dispose = reaction(
+    this._disposeStatusReaction = reaction(
       () => this.status,
       (status) => {
         if (status === 'playing') {
@@ -26,6 +30,9 @@ export class AudioPlayerViewModel {
         }
       }
     );
+
+    this._audioPlayer = audioPlayer;
+    this._audioPlayer.setSrc(audioUrl);
   }
 
   play = () => {
@@ -41,6 +48,6 @@ export class AudioPlayerViewModel {
   };
 
   destroy = () => {
-    this.dispose();
+    this._disposeStatusReaction();
   };
 }
