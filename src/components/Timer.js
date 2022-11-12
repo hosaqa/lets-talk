@@ -33,5 +33,5 @@ export default function UITimer({ className, timeout, onExpire }) {
 UITimer.propTypes = {
   className: PropTypes.string,
   timeout: PropTypes.number.isRequired,
-  onExpire: PropTypes.func
+  onExpire: PropTypes.func,
 };

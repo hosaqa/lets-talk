@@ -13,7 +13,7 @@ export class AudioPlayer implements IAudioPlayer {
 
   setSrc = (audioUrl: string) => {
     this._audio.src = audioUrl;
-  }
+  };
 
   play = () => {
     this._audio.play();
@@ -23,5 +23,7 @@ export class AudioPlayer implements IAudioPlayer {
     this._audio.pause();
   };
 
-  stop = () => {};
+  stop = () => {
+    throw new Error('should be implemented');
+  };
 }

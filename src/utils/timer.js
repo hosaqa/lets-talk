@@ -3,7 +3,7 @@ class Timer {
     this._toEnd = timeout;
     this._callbacks = {
       onTick: [],
-      onEnd: []
+      onEnd: [],
     };
   }
 

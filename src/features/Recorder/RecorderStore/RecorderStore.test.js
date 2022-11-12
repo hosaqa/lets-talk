@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import RecorderStore from './RecorderStore';
 
 test('initial status should be "idle"', () => {
   const recorderStore = new RecorderStore({
     startRecord: () => {},
     pause: () => {},
-    stop: () => {}
+    stop: () => {},
   });
 
   expect(recorderStore.status).toBe('idle');
@@ -14,7 +15,7 @@ test('stardRecord method should set status to "recording"', () => {
   const recorderStore = new RecorderStore({
     startRecord: () => {},
     pause: () => {},
-    stop: () => {}
+    stop: () => {},
   });
 
   recorderStore.startRecord();
@@ -26,7 +27,7 @@ test('after calling stardRecord method should be called stardRecord method of Me
   const mediaRecordManager = {
     startRecord: jest.fn(),
     pause: () => {},
-    stop: () => {}
+    stop: () => {},
   };
   const recorderStore = new RecorderStore(mediaRecordManager);
 
@@ -39,7 +40,7 @@ test('method pause should set status to "paused"', () => {
   const mediaRecordManager = {
     startRecord: () => {},
     pause: () => {},
-    stop: () => {}
+    stop: () => {},
   };
   const recorderStore = new RecorderStore(mediaRecordManager);
 
@@ -53,7 +54,7 @@ test('after calling method pause should be called "pause" method of MediaRecordM
   const mediaRecordManager = {
     startRecord: () => {},
     pause: jest.fn(),
-    stop: () => {}
+    stop: () => {},
   };
   const recorderStore = new RecorderStore(mediaRecordManager);
 
@@ -67,7 +68,7 @@ test('method stop should set status to "stopped"', () => {
   const mediaRecordManager = {
     startRecord: () => {},
     pause: () => {},
-    stop: () => {}
+    stop: () => {},
   };
   const recorderStore = new RecorderStore(mediaRecordManager);
 
@@ -81,7 +82,7 @@ test('after calling method stop should be called "stop" method of MediaRecordMan
   const mediaRecordManager = {
     startRecord: () => {},
     pause: () => {},
-    stop: jest.fn()
+    stop: jest.fn(),
   };
   const recorderStore = new RecorderStore(mediaRecordManager);
 

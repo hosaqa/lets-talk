@@ -13,6 +13,6 @@ export default function useStopwatch() {
     currentTime,
     start: () => stopwatchRef.current.start(),
     pause: () => stopwatchRef.current.pause(),
-    resume: () => stopwatchRef.current.resume()
+    resume: () => stopwatchRef.current.resume(),
   };
 }

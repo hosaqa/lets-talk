@@ -24,7 +24,7 @@ export default class RecorderStore {
       reset: action,
       setCurrentTime: action,
       audioUrl: observable,
-      setAudioUrl: action
+      setAudioUrl: action,
     });
 
     this.dispose = reaction(

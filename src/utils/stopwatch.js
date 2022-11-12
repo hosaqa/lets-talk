@@ -3,7 +3,7 @@ class Stopwatch {
     this._current = 0;
     this._started = false;
     this._callbacks = {
-      tick: onTick ? [onTick] : []
+      tick: onTick ? [onTick] : [],
     };
 
     if (autorun) {

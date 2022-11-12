@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 
-export function useViewModel(viewModelInstance) {
-  const ref = useRef(viewModelInstance);
+export function useViewModel<T extends { destroy?: () => void | undefined }>(viewModelInstance: T) {
+  const ref = useRef<T>(viewModelInstance);
 
   useEffect(() => {
     return () => {

@@ -1,21 +1,17 @@
 import { makeObservable, observable, action, reaction, IReactionDisposer } from 'mobx';
 import { IAudioPlayer } from '../../services/audioPlayer';
 
-
 export class AudioPlayerViewModel {
   status: 'idle' | 'playing' | 'paused' | 'stopped' = 'idle';
   private _disposeStatusReaction: IReactionDisposer;
   private _audioPlayer: IAudioPlayer;
 
-  public constructor(
-    audioPlayer: IAudioPlayer,
-    audioUrl: string,
-  ) {
+  public constructor(audioPlayer: IAudioPlayer, audioUrl: string) {
     makeObservable(this, {
       status: observable,
       play: action,
       pause: action,
-      stop: action
+      stop: action,
     });
 
     this._disposeStatusReaction = reaction(

@@ -1,4 +1,5 @@
 {
+  "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
     "es2021": true,
@@ -7,7 +8,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -18,9 +20,16 @@
   },
   "plugins": [
     "prettier",
-    "react"
+    "react",
+    "@typescript-eslint"
   ],
   "rules": {
+    "prettier/prettier": "error"
   },
-  "ignorePatterns": ["jest.config.js", "babel.config.js", "tsconfig.json"]
+  "ignorePatterns": ["jest.config.js", "babel.config.js", "tsconfig.json"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

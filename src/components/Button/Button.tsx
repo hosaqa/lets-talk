@@ -12,11 +12,17 @@ const SButton = styled.button`
   border-radius: 12px;
 `;
 
-export default function Button({ children, className, ...buttonProps }: {
-  children: React.ReactNode | React.ReactElement,
-  className?: string
+export default function Button({
+  children,
+  className,
+  ...buttonProps
+}: {
+  children: React.ReactNode | React.ReactElement;
+  className?: string;
 } & React.HTMLAttributes<HTMLButtonElement>) {
   return (
-    <SButton children={children} className={className} {...buttonProps} />
+    <SButton className={className} {...buttonProps}>
+      {children}
+    </SButton>
   );
 }

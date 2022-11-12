@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import Button from '../../components/Button/Button';
 import { useViewModel } from '../../hooks/useViewModel';

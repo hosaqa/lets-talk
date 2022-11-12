@@ -1,3 +1,5 @@
 export const TYPES = {
-  'AudioPlayer': Symbol('AudioPlayer'),
-}
+  AuthService: Symbol('AuthService'),
+  LoginViewModel: Symbol('LoginViewModel'),
+  AudioPlayer: Symbol('AudioPlayer'),
+};

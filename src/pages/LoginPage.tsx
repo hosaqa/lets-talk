@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import Container from '../components/layout/Container';
-import Recorder from '../features/Recorder/Recorder';
+import LoginForm from '../features/LoginForm/LoginForm';
 
-const PageContent = styled.div`
+const PageContent = styled.section`
   height: 100vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export default function Home() {
+export function LoginPage() {
   return (
     <Container>
       <PageContent>
-        <Recorder />
+        <LoginForm />
       </PageContent>
     </Container>
   );
