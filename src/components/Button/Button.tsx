@@ -17,10 +17,11 @@ export default function Button({
   className,
   ...buttonProps
 }: {
-  children: React.ReactNode | React.ReactElement;
+  children?: React.ReactNode;
   className?: string;
-} & React.HTMLAttributes<HTMLButtonElement>) {
+} & React.HTMLProps<HTMLButtonElement>) {
   return (
+    //TODO: FIX TYPE
     <SButton className={className} {...buttonProps}>
       {children}
     </SButton>

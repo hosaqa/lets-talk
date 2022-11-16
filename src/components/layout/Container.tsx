@@ -7,10 +7,17 @@ const SContainer = styled.div`
   margin: auto;
 `;
 
-export default function Container({ children }) {
-  return <SContainer>{children}</SContainer>;
+export default function Container({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <SContainer className={className}>{children}</SContainer>;
 }
 
 Container.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  className: PropTypes.string,
 };
